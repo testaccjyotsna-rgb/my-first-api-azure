@@ -9,7 +9,7 @@ builder.Services.AddDbContext<TasksDbContext>(options =>
     
 // Add services to the container.
 
-builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+builder.Services.AddScoped<ITasksManager, EfTasksManager>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
