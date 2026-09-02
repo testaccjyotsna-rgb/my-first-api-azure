@@ -1,10 +1,15 @@
- using my_first_api_azure.Services;
+using Microsoft.EntityFrameworkCore;
+using my_first_api_azure.Data;
+using my_first_api_azure.Services;
 using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<TasksDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("TasksDb")));
+    
 // Add services to the container.
 
-builder.Services.AddSingleton<ITasksManager, FakeTasksManager>();
+builder.Services.AddScoped<ITasksManager, EfTasksManager>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
